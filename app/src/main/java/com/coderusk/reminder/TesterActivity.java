@@ -14,6 +14,6 @@ public class TesterActivity extends AppCompatActivity {
     }
     private void initialize()
     {
-        
+
     }
 }

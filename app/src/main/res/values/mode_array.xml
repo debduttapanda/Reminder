@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mode_array">
+        <item>NUMBER_OF_DAYS</item>
+        <item>EVERYDAY</item>
+        <item>DAYS_IN_WEEK</item>
+        <item>ONCE_A_WEEK</item>
+        <item>ONCE_IN_TWO_WEEKS</item>
+        <item>ONCE_A_MONTH</item>
+        <item>ONCE_IN_TWO_MONTHS</item>
+        <item>ONCE_IN_THREE_MONTHS</item>
+    </string-array>
+</resources>
