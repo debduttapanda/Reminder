@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/llv_reminder_test"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     android:padding="5dp">
 
     <ScrollView
+        android:id="@+id/sv_input"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/llv_execute"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
+            android:id="@+id/llv_sv_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -29,37 +35,305 @@
 
                     <TextView
                         android:id="@+id/tv_label_mode"
-                        android:text="Mode"
-                        style="@style/Label" />
+                        style="@style/Label"
+                        android:text="Mode" />
 
                     <Spinner
                         android:id="@+id/sp_mode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:entries="@array/mode_array" />
+
+                    <TextView
+                        android:id="@+id/tv_label_time"
+                        style="@style/ClickLabel"
+                        android:onClick="onClickToggler"
+                        android:text="Time" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_timepoint"
+                        android:visibility="visible"
+                        style="@style/ValueLabel"/>
+
+                    <TimePicker
+                        android:id="@+id/tp_timepoint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:timePickerMode="spinner"
+                        android:visibility="gone"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_label_weekdays"
+                        style="@style/Label"
+                        android:text="WeekDays" />
+
+                    <LinearLayout
+                        android:id="@+id/llh_week_days_four"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/cb_sunday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="SUN" />
+
+                        <CheckBox
+                            android:id="@+id/cb_monday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="MON" />
+
+                        <CheckBox
+                            android:id="@+id/cb_tuesday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TUE" />
+
+                        <CheckBox
+                            android:id="@+id/cb_wednesday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="WED" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llh_week_days_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/cb_thursday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="THU" />
+
+                        <CheckBox
+                            android:id="@+id/cb_friday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="FRI" />
+
+                        <CheckBox
+                            android:id="@+id/cb_saturday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="SAT" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_label_monthday"
+                        style="@style/ClickLabel"
+                        android:onClick="onClickToggler"
+                        android:text="Month Day" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_monthday"
+                        android:visibility="visible"
+                        style="@style/ValueLabel"/>
+
+                    <DatePicker
+                        android:id="@+id/dp_monthday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
+                        android:visibility="gone"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_label_startdate"
+                        style="@style/ClickLabel"
+                        android:onClick="onClickToggler"
+                        android:text="Start Date" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_startdate"
+                        android:visibility="visible"
+                        style="@style/ValueLabel"/>
+                    <DatePicker
+                        android:id="@+id/dp_startdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
+                        android:visibility="gone"/>
+                    <LinearLayout
+                        android:id="@+id/llh_month_day_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/llv_month_count_holder"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_label_month_count"
+                                style="@style/ClickLabel"
+                                android:layout_width="match_parent"
+                                android:onClick="onClickToggler"
+                                android:text="Month Count" />
+
+                            <TextView
+                                android:id="@+id/tv_month_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="visible"
+                                style="@style/ValueLabel" />
+
+                            <NumberPicker
+                                android:id="@+id/np_month_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llv_day_count_holder"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_label_day_count"
+                                style="@style/ClickLabel"
+                                android:layout_width="match_parent"
+                                android:onClick="onClickToggler"
+                                android:text="Day Count" />
+
+                            <TextView
+                                android:id="@+id/tv_day_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="visible"
+                                style="@style/ValueLabel" />
+
+                            <NumberPicker
+                                android:id="@+id/np_day_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:calendarViewShown="false"
+                                android:datePickerMode="spinner"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llv_now_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/llv_execute"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_label_nowdate"
+                        style="@style/ClickLabel"
+                        android:layout_width="match_parent"
+                        android:onClick="onClickToggler"
+                        android:text="Now Date" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_nowdate"
+                        android:visibility="visible"
+                        style="@style/ValueLabel"/>
+                    <DatePicker
+                        android:id="@+id/dp_nowdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/tv_label_nowtime"
+                        style="@style/ClickLabel"
+                        android:layout_width="match_parent"
+                        android:onClick="onClickToggler"
+                        android:text="Now Time" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_nowtime"
+                        android:visibility="visible"
+                        style="@style/ValueLabel"/>
+                    <TimePicker
+                        android:id="@+id/tp_now_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:timePickerMode="spinner"
+                        android:visibility="gone"
+                        />
+                </LinearLayout>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llv_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
 
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/llv_execute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@id/llv_result">
+
+        <Button
+            android:id="@+id/bt_execute"
+            style="@style/ClickLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llv_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_result"
+                    style="@style/result"
+                    android:padding="5dp"
+                    android:text="calendar==null"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</RelativeLayout>

@@ -27,4 +27,27 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="ClickLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@drawable/round_corner_for_click_label</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="ValueLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#1E88E5</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="result">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#1E88E5</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
 </resources>

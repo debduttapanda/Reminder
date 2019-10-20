@@ -6,6 +6,7 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class SingleTimeReminder {
 
@@ -148,7 +149,9 @@ public class SingleTimeReminder {
         String min=String.valueOf(m);
         String sec=String.valueOf(s);
 
-        String ret=day+"-"+month+"-"+year+"_"+hour+":"+min+":"+sec;
+        String weekDayString=calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+
+        String ret=weekDayString+":"+day+"-"+month+"-"+year+"_"+hour+":"+min+":"+sec;
 
         return ret;
     }
@@ -297,8 +300,12 @@ public class SingleTimeReminder {
             inputOnTime.set(Calendar.HOUR,timePoint.getHour());
             inputOnTime.set(Calendar.MINUTE,timePoint.getMin());
             inputOnTime.set(Calendar.SECOND,timePoint.getSec());
-            if(input.before(inputOnTime)) {
-                return inputOnTime;
+
+            final Calendar ret=(Calendar) inputOnTime.clone();
+
+            boolean before=input.before(inputOnTime);
+            if(before) {
+                return ret;
             }
         }
         int nextAlarmWeekDay=nextAlarmDayForDaysInweek(inputWeekDay+1);
@@ -322,7 +329,7 @@ public class SingleTimeReminder {
         {
             return first;
         }
-        Calendar next=getNextForDaysInWeek(now);
+        final Calendar next=getNextForDaysInWeek(now);
         if(next.after(last)){return null;}
         return next;
     }
@@ -721,5 +728,11 @@ public class SingleTimeReminder {
     public void setNowCalendar(Calendar input)
     {
         unrealNow=input;
+    }
+
+    public String nextAlarmString()
+    {
+        Calendar c=nextAlarm();
+        return dsfc(c);
     }
 }
